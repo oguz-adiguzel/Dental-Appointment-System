@@ -92,7 +92,7 @@ const page = () => {
       
     } catch (error) {
       console.log("error", error);
-      toast.success('Beklenmedik bir hata oluştu', {
+      toast.error('Beklenmedik bir hata oluştu', {
         position: "top-right",
         autoClose: 3000,
         hideProgressBar: false,
