@@ -20,7 +20,7 @@ const page = () => {
   const getDoctor = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:3001/doctors/${params.slug[0]}`
+        `${process.env.NEXT_PUBLIC_API_URL}/doctors/${params.slug[0]}`
       );
       setDoctor(response.data.doctor);
     } catch (error) {

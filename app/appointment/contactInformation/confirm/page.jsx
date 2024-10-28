@@ -29,7 +29,7 @@ const page = () => {
 
   const getAllDoctors = async () => {
     try {
-      const response = await axios.get("http://localhost:3001/doctors/");
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/doctors/`);
 
       setDoctorList(response.data.doctors);
     } catch (error) {
@@ -47,7 +47,7 @@ const page = () => {
   const makeAppointment = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:3001/doctors/book-appointment",
+        `${process.env.NEXT_PUBLIC_API_URL}/doctors/book-appointment`,
         {
           patientName: name,
           patientSurName: surName,
@@ -100,7 +100,7 @@ const page = () => {
   const sendCode = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:3001/email/send-code",
+        `${process.env.NEXT_PUBLIC_API_URL}/email/send-code`,
         {
           email: email,
         }
@@ -124,7 +124,7 @@ const page = () => {
   const verifyCode = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:3001/email/verify-code",
+        `${process.env.NEXT_PUBLIC_API_URL}/email/verify-code`,
         {
           email: email,
           code: inputCode,

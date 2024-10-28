@@ -30,7 +30,7 @@ const MakeAppointment = ({ modal, onValueChange }) => {
 
   const getAllDoctors = async () => {
     try {
-      const response = await axios.get("http://localhost:3001/doctors/");
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/doctors/`);
 
       setDoctorList(response.data.doctors);
     } catch (error) {
@@ -42,7 +42,7 @@ const MakeAppointment = ({ modal, onValueChange }) => {
     try {
       if ((selectedDepartment, selectedDentist)) {
         const response = await axios.post(
-          "http://localhost:3001/doctors/check-availability-admin",
+          `${process.env.NEXT_PUBLIC_API_URL}/doctors/check-availability-admin`,
           {
             doctorId: selectedDentist,
             date: date,
@@ -90,7 +90,7 @@ const MakeAppointment = ({ modal, onValueChange }) => {
   const makeAppointment = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:3001/doctors/book-appointment",
+        `${process.env.NEXT_PUBLIC_API_URL}/doctors/book-appointment`,
         {
           patientName: name,
           patientSurName: surName,

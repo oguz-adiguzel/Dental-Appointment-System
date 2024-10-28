@@ -19,7 +19,7 @@ const page = () => {
 
   const login = async () => {
     try {
-      const response = await axios.post("http://localhost:3001/admin/login", {
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/admin/login`, {
         userName: userName,
         password: password,
       });

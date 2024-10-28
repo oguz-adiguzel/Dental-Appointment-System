@@ -43,7 +43,7 @@ const AppointmentManage = () => {
     if (!appointmetList) {
       try {
         const response = await axios.get(
-          "http://localhost:3001/doctors/getAllAppointment"
+          `${process.env.NEXT_PUBLIC_API_URL}/doctors/getAllAppointment`
         );
         setAppointmentList(response.data.appointments);
       } catch (error) {
@@ -54,7 +54,7 @@ const AppointmentManage = () => {
 
   const getAllDoctors = async () => {
     try {
-      const response = await axios.get("http://localhost:3001/doctors/");
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/doctors/`);
 
       setDoctors(response.data.doctors);
     } catch (error) {
@@ -89,7 +89,7 @@ const AppointmentManage = () => {
     if (!confirm) {
       try {
         const response = await axios.post(
-          "http://localhost:3001/doctors/confirm",
+          `${process.env.NEXT_PUBLIC_API_URL}/doctors/confirm`,
           {
             id: propId,
           }

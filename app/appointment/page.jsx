@@ -1,12 +1,5 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  addDate,
-  addDentist,
-  addDepartment,
-  addTime,
-} from "../features/appointment/appointSlice";
 import axios from "axios";
 import { useRouter } from "next/navigation";
 import { ToastContainer, toast } from "react-toastify";
@@ -58,7 +51,7 @@ const page = () => {
     try {
       if ((selectedDepartment, selectedDentist, selectedDate)) {
         const response = await axios.post(
-          "http://localhost:3001/doctors/check-availability",
+          `${process.env.NEXT_PUBLIC_API_URL}/doctors/check-availability`,
           {
             doctorId: selectedDentist,
             date: selectedDate,
@@ -109,7 +102,7 @@ const page = () => {
 
   const getAllDoctors = async () => {
     try {
-      const response = await axios.get("http://localhost:3001/doctors/");
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/doctors/`);
 
       setDoctorList(response.data.doctors);
     } catch (error) {

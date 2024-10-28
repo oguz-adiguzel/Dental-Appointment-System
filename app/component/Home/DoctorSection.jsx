@@ -19,7 +19,7 @@ const DoctorSection = () => {
 
   const getDoctorList = async() => {
     try{
-      const response = await axios.get('http://localhost:3001/doctors')
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/doctors`)
       if(response){
         setDoctorData(response.data.doctors)
       }

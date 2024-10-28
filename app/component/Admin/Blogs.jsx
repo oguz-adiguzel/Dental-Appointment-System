@@ -14,7 +14,7 @@ const Blogs = () => {
 
   const getAllBlog = async () => {
     try {
-      const response = await axios.get("http://localhost:3001/blog");
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/blog`);
       setBlogs(response.data.blogs);
     } catch (error) {
       console.log("error", error);
@@ -23,7 +23,7 @@ const Blogs = () => {
 
   const deleteBlog = async (id) => {
     try {
-      const response = await axios.delete(`http://localhost:3001/blog/${id}`);
+      const response = await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/blog/${id}`);
       toast.success(response.data.message, {
         position: "top-right",
         autoClose: 3000,

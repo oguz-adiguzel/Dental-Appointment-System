@@ -15,7 +15,7 @@ const page = () => {
 
   const getAllBlog = async() =>{
     try{
-      const response = await axios.get('http://localhost:3001/blog')
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/blog `)
       setBlogs(response.data.blogs)
     }catch(error){
       console.log('error', error);

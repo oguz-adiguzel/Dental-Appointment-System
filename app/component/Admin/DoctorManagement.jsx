@@ -32,7 +32,7 @@ const DoctorManagement = () => {
 
   const getAllDoctors = async () => {
     try {
-      const response = await axios.get("http://localhost:3001/doctors/");
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/doctors/`);
 
       setDoctorList(response.data.doctors);
     } catch (error) {
@@ -58,7 +58,7 @@ const DoctorManagement = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:3001/doctors",
+        `${process.env.NEXT_PUBLIC_API_URL}/doctors`,
         formData
       );
       toast.success(response.data.message, {
@@ -109,7 +109,7 @@ const DoctorManagement = () => {
 
   const closeDate = async() =>{
     try{
-      const response = await axios.post('http://localhost:3001/doctors/closeDate',{
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/doctors/closeDate`,{
         doctorId:doctorId,
         date:selectedDate
       })

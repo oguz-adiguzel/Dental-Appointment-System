@@ -42,7 +42,7 @@ const Appointmet = () => {
   const getAppointmentList = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:3001/doctors/getAllAppointment"
+        `${process.env.NEXT_PUBLIC_API_URL}/doctors/getAllAppointment`
       );
       setAppointmentList(response.data.appointments);
       setLoading(false)
@@ -53,7 +53,7 @@ const Appointmet = () => {
 
   const getAllDoctors = async () => {
     try {
-      const response = await axios.get("http://localhost:3001/doctors/");
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/doctors/`);
 
       setDoctors(response.data.doctors);
     } catch (error) {

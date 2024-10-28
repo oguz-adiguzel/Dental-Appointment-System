@@ -23,7 +23,7 @@ const BlogManagement = () => {
     formData.append("text", text);
     formData.append("image", photo);
     try {
-      const response = await axios.post("http://localhost:3001/blog", formData);
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/blog`, formData);
       toast.success(response.data.message, {
         position: "top-right",
         autoClose: 3000,

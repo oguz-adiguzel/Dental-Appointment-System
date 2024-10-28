@@ -20,7 +20,7 @@ const page = () => {
   const getBlog = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:3001/blog/${params.slug[0]}`
+        `${process.env.NEXT_PUBLIC_API_URL}/blog/${params.slug[0]}`
       );
       setBlog(response.data.blog);
     } catch (error) {

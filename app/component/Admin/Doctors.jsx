@@ -26,7 +26,7 @@ const Doctors = () => {
   const getAppointment = async (id) => {
     try {
       const response = await axios.post(
-        "http://localhost:3001/doctors/getAppointment",
+        `${process.env.NEXT_PUBLIC_API_URL}/doctors/getAppointment`,
         {
           id: id,
         }
@@ -57,7 +57,7 @@ const Doctors = () => {
 
   const getAllDoctors = async () => {
     try {
-      const response = await axios.get("http://localhost:3001/doctors/");
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/doctors/`);
 
       setDoctors(response.data.doctors);
     } catch (error) {
