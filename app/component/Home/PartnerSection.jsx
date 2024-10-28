@@ -1,13 +1,13 @@
 'use client'
 import React from 'react'
-import { Navigation, Pagination, Autoplay } from "swiper/modules";
+import { Navigation, Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
 const PartnerSection = () => {
+
     const data = [
         {
             id:1,
@@ -51,23 +51,15 @@ const PartnerSection = () => {
         }
     ]
   return (
-    <div className='container mx-auto px-20'>
-        <p className='text-4xl text-center'>Devam Eden <span className='text-[#00BCD5]'>Ortaklarımız</span></p>
+    <div className='lg:container w-full mx-auto px-5 lg:px-20'>
+        <p className='lg:text-4xl text-2xl text-center'>Devam Eden <span className='text-[#00BCD5]'>Ortaklarımız</span></p>
         <p className='text-center text-gray-400'>Gülümsemeden asla tamamen giyinmiş sayılmazsın!</p>
         <div className='py-20'>
         <Swiper
-          // slidesPerView={5}
           modules={[Navigation, Autoplay]}
           navigation
           loop={true}
-          // autoplay={{
-          //     delay: 2500,
-          //     disableOnInteraction: false,
-          //   }}
-          //   navigation={{
-          //     prevEl: "#prevBrandSlider",
-          //     nextEl: "#nextBrandSlider",
-          //   }}
+         
           breakpoints={{
             0: {
               slidesPerView: 1,

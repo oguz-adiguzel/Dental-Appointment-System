@@ -2,6 +2,7 @@
 import React from 'react'
 
 const TreatmentsSection = () => {
+  
   const cardData = [
     {
       id:1,
@@ -49,9 +50,9 @@ const TreatmentsSection = () => {
   return (
     <div className='w-full py-20 flex flex-col items-center relative'>
       <img className='absolute top-9' src='title_img1.png' />
-        <p className='text-center font-bold text-5xl text-[#00BCD5]'>Diş Tedavilerimiz</p>
-        <p className='text-gray-400 mt-2 text-center'>Gülümseyin….bu sizin yüz değerinizi yükseltir!</p>
-        <div className='w-2/3 mx-auto py-20 grid grid-cols-3 gap-x-8 gap-y-20 mt-10'>
+        <p className='text-center font-bold lg:text-5xl text-2xl text-[#00BCD5]'>Diş Tedavilerimiz</p>
+        <p className='text-gray-400 mt-2 text-sm lg:text-base text-center'>Gülümseyin….bu sizin yüz değerinizi yükseltir!</p>
+        <div className='w-2/3 mx-auto py-20 grid lg:grid-cols-3 grid-cols-1 gap-x-8 gap-y-20 mt-10'>
           {
             cardData.map((item)=>(
               <div key={item.id} className='border py-16 px-8 relative flex flex-col items-center group hover:bg-[#F6F9F9] duration-500'>

@@ -10,8 +10,8 @@ import DisHekimligi from "../component/Services/DisHekimligi";
 import Implantlar from "../component/Services/Implantlar";
 
 const page = () => {
-  const [comp, setComp] = useState("TibbiTavsiyeler");
 
+  const [comp, setComp] = useState("TibbiTavsiyeler");
   const [navTitle, setNavTitle] = useState();
 
   const leftItem = [
@@ -69,7 +69,7 @@ const page = () => {
   return (
     <div className="w-full bg-white text-black">
       <div className="w-full bg-[#F2F2F2] py-11">
-        <div className="w-3/5 mx-auto">
+        <div className="w-full px-5 lg:px-0 lg:w-3/5 mx-auto">
           <p className="font-bold text-2xl">SERVİSLER</p>
           <p className="text-xs mt-2">
             Anasayfa / <span className="text-gray-400">Servisler / </span>
@@ -77,7 +77,7 @@ const page = () => {
           </p>
         </div>
       </div>
-      <div className="w-3/5 mx-auto grid grid-cols-6">
+      <div className="w-full lg:w-3/5 mx-auto grid grid-cols-1 px-5 lg:px-0 lg:grid-cols-6">
         <div className="col-span-2 py-10 pr-7">
           {leftItem.map((item) => (
             <div

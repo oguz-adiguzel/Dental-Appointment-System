@@ -1,6 +1,7 @@
 import React from "react";
 
 const InfoSection = () => {
+  
   const data = [
     {
       id: 1,
@@ -28,7 +29,7 @@ const InfoSection = () => {
     },
   ];
   return (
-    <div className="container mx-auto grid grid-cols-4 gap-x-10 px-40 pb-20">
+    <div className="container mx-auto grid lg:grid-cols-4 grid-cols-2 lg:gap-x-10 gap-x-2 px-5 lg:px-40 pb-20">
       {data.map((item) => (
         <div key={item.id} className="bg-[#F6F9F9] flex flex-col items-center py-14">
           <img loading="lazy" src={item.icon} />

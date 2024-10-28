@@ -11,6 +11,7 @@ import PartnerSection from "./component/Home/PartnerSection";
 export default function Home() {
   return (
     <div className="bg-white text-black">
+      <title>Dental | Online Randevu Sistemi</title>
       <Main />
       <TreatmentsSection />
       <RelaxSection />

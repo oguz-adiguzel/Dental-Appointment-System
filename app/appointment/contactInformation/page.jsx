@@ -1,20 +1,12 @@
 "use client";
-import {
-  addAddress,
-  addEmail,
-  addMessage,
-  addName,
-  addPhone,
-  addSurname,
-} from "@/app/features/appointment/appointSlice";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
+import Cookies from "js-cookie";
 
 const page = () => {
+
   const [name, setName] = useState();
   const [surName, setSurname] = useState();
   const [phone, setPhone] = useState();
@@ -22,17 +14,16 @@ const page = () => {
   const [address, setAddress] = useState();
   const [message, setMessage] = useState();
 
-  const dispatch = useDispatch();
   const router = useRouter();
 
   const next = async () => {
     if ((name, surName, phone, email, address, message)) {
-      await dispatch(addName(name));
-      await dispatch(addSurname(surName));
-      await dispatch(addPhone(phone));
-      await dispatch(addEmail(email));
-      await dispatch(addAddress(address));
-      await dispatch(addMessage(message));
+      Cookies.set("name", name);
+      Cookies.set("surName", surName);
+      Cookies.set("phone", phone);
+      Cookies.set("email", email);
+      Cookies.set("address", address);
+      Cookies.set("message", message);
       router.push("/appointment/contactInformation/confirm");
     } else {
       alert("Alanları Doldurunuz");
@@ -42,7 +33,7 @@ const page = () => {
   return (
     <div className="w-full bg-white text-black">
       <div className="w-full bg-[#F2F2F2] py-11">
-        <div className="w-3/5 mx-auto">
+        <div className="w-full lg:w-3/5 px-5 lg:px-0 mx-auto">
           <p className="font-bold text-2xl">ONLİNE RANDEVU</p>
           <p className="text-xs mt-2">
             Anasayfa / <span className="text-gray-400">Online Randevu</span>
@@ -50,7 +41,7 @@ const page = () => {
         </div>
       </div>
 
-      <div className="w-3/5 mx-auto grid grid-cols-3 mt-10">
+      <div className="w-full lg:w-3/5 mx-auto grid grid-cols-3 mt-10">
         <div className="flex space-x-4 border-t-2 border-gray-200 py-4 px-2">
           <p className="text-5xl font-extralight">1</p>
           <div>
@@ -82,7 +73,7 @@ const page = () => {
         </div>
       </div>
 
-      <div className="w-3/5 mx-auto py-16">
+      <div className="w-full lg:w-3/5 px-5 lg:px-0 mx-auto py-16">
         <p className="font-extralight text-gray-400">Tüm alanlar zorunludur</p>
         <p className="mt-10 text-2xl font-light">İletişim Bilgileri</p>
         <div className="w-full grid grid-cols-2 gap-x-9 pt-10">
@@ -100,13 +91,6 @@ const page = () => {
           />
         </div>
         <div className="w-full grid grid-cols-2 gap-x-9 pt-10">
-          {/* <input
-            onChange={(e) => setPhone(e.target.value)}
-            className="w-full border-b pb-4 pt-2 outline-none focus:border-gray-700 pl-5"
-            type="tel"
-            placeholder="Telefon (555-555-5555)"
-          /> */}
-          
               <PhoneInput
                 country={"tr"}
                 value={phone}

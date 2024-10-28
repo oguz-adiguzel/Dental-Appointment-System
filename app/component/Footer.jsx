@@ -35,8 +35,8 @@ const Footer = () => {
     },
   ];
   return (
-    <div className="w-full pt-10 bg-[#F6F9F9]">
-      <div className="w-3/5 mx-auto grid grid-cols-3 border-b border-[#00BCD5] pb-20">
+    <div className="w-full pt-10 bg-[#F6F9F9] px-5 lg:px-0">
+      <div className="w-full lg:w-3/5 mx-auto grid grid-cols-1 lg:grid-cols-3 border-b border-[#00BCD5] pb-20">
         <div className="flex flex-col items-start pr-10">
           <img loading="lazy" className="w-36" src="/logo.webp" />
           <p className="text-gray-500 mt-8">
@@ -45,7 +45,7 @@ const Footer = () => {
             düzenli olarak ziyaret edin ve sağlıklı kalın.
           </p>
         </div>
-        <div className="text-black flex flex-col items-center">
+        <div className="text-black flex flex-col items-start lg:items-center mt-5 lg:mt-0">
           <p className="font-semibold text-lg">
             Kullanışlı <span className="text-[#00BCD5]">Bağlantılar</span>
           </p>
@@ -55,7 +55,7 @@ const Footer = () => {
             ))}
           </div>
         </div>
-        <div className="text-gray-500 flex flex-col items-end">
+        <div className="text-gray-500 flex flex-col items-start lg:items-end">
           <p className="font-semibold text-lg text-[#00BCD5]">Adresimiz</p>
           <p className="mt-2">64C East Crest, Melane Plaza,</p>
           <p>DanyBoyle, TT 33546</p>

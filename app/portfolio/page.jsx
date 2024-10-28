@@ -5,9 +5,8 @@ import { IoIosSearch, IoIosLink } from "react-icons/io";
 
 const page = () => {
 
-    const [filterCat, setFilterCat] = useState('Tümü')
-
-
+  const [filterCat, setFilterCat] = useState('Tümü')
+  
   const categories = [
     "Tümü",
     "Diş Telleri",
@@ -82,7 +81,7 @@ const page = () => {
   return (
     <div className="w-full bg-white text-black">
       <div className="w-full bg-[#F2F2F2] py-11">
-        <div className="w-3/5 mx-auto">
+        <div className="w-full lg:w-3/5 px-5 lg:px-0 mx-auto">
           <p className="font-bold text-2xl">PORTFOLYO</p>
           <p className="text-xs mt-2">
             Anasayfa / <span className="text-gray-400">Portfolyo</span>
@@ -90,15 +89,15 @@ const page = () => {
         </div>
       </div>
 
-      <div className="w-3/5 mx-auto mt-10">
-        <div className="w-full flex items-center justify-center space-x-5">
+      <div className="w-full lg:w-3/5 mx-auto px-5 lg:px-0 mt-10">
+        <div className="w-full grid grid-cols-3 lg:flex items-center justify-center space-x-5">
           {categories.map((item, index) => (
-            <div onClick={()=>setFilterCat(item)} className={`px-4 py-3 border rounded-md uppercase text-xs font-bold text-gray-400 cursor-pointer hover:bg-[#00BCD5] hover:text-white duration-300 ${item === filterCat ? 'bg-[#00BCD5] text-white':''}`}>
+            <div onClick={()=>setFilterCat(item)} className={`lg:px-4 px-1 py-3 border rounded-md uppercase text-xs font-bold text-gray-400 cursor-pointer hover:bg-[#00BCD5] hover:text-white duration-300 ${item === filterCat ? 'bg-[#00BCD5] text-white':''}`}>
               {item}
             </div>
           ))}
         </div>
-        <div className="w-full grid grid-cols-3 gap-x-4 gap-y-6 mt-10 pb-10">
+        <div className="w-full grid grid-cols-1 lg:grid-cols-3 gap-x-4 gap-y-6 mt-10 pb-10">
           {imageData.filter((item) => item.category === filterCat).map((item) => (
             <div
               key={item.id}

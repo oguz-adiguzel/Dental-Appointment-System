@@ -1,13 +1,10 @@
 "use client";
 import React, { useState } from "react";
 import { Accordion, AccordionTab } from "primereact/accordion";
-import { FaTooth } from "react-icons/fa6";
 import { TfiHeadphoneAlt } from "react-icons/tfi";
 
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-
 const page = () => {
+
   const [activeIndex, setActiveIndex] = useState(0);
 
   const onTabChange = (e) => {
@@ -16,22 +13,21 @@ const page = () => {
 
   return (
     <div className="w-full bg-white text-black pb-40">
-      
       <div className="w-full bg-[#F2F2F2] py-11">
-        <div className="w-3/5 mx-auto">
+        <div className="w-full lg:w-3/5 mx-auto px-5 lg:px-0">
           <p className="font-bold text-2xl">HAKKIMIZDA</p>
           <p className="text-xs mt-2">
             Anasayfa / <span className="text-gray-400">Hakkımızda</span>
           </p>
         </div>
       </div>
-      <div className="w-3/5 mx-auto py-10">
+      <div className="w-full lg:w-3/5 mx-auto py-10 px-5 lg:px-0">
         <p className="text-3xl font-light">Neden en iyisiyiz?</p>
         <p className="text-sm mt-2 text-gray-400">
           İyi yolculuk bir adımla başlar!
         </p>
-        <div className="w-full h-[500px] grid grid-cols-6 gap-x-10 mt-10">
-          <div className="col-span-4">
+        <div className="w-full h-auto lg:h-[500px] grid grid-cols-1 lg:grid-cols-6 gap-x-10 mt-10">
+          <div className="lg:col-span-4 w-full lg:w-auto">
             <Accordion activeIndex={activeIndex} onTabChange={onTabChange}>
               <AccordionTab
                 header={
@@ -145,14 +141,14 @@ const page = () => {
               </AccordionTab>
             </Accordion>
           </div>
-          <div className="col-span-2">
+          <div className="col-span-2 mt-5 lg:mt-0">
             <img loading="lazy" className="w-full" src="add1.jpg" />
           </div>
         </div>
       </div>
       <div className="w-full py-20 bg-[#2BC4D9]">
-        <div className="w-3/5 mx-auto flex border-b border-blue-200 pb-16">
-          <div className="w-1/2 flex flex-col items-center px-10">
+        <div className="w-full lg:w-3/5 mx-auto flex border-b border-blue-200 pb-16">
+          <div className="w-full lg:w-1/2 flex flex-col items-center px-10">
             <img loading="lazy" src="icon8.webp" />
             <p className="text-white text-2xl mt-3">
               Dişlerinizi{" "}
@@ -187,7 +183,7 @@ const page = () => {
         <p className="text-center text-white italic">If you are going to passage of Lorem Ipsum, you need to be sure there isn’t anything embarrassing hidden in the middle of text.</p>
         
       </div>
-      <div className="w-3/5 mx-auto grid grid-cols-10 gap-x-2 mt-16">
+      <div className="w-full px-5 lg:px-0 lg:w-3/5 mx-auto grid grid-cols-1 lg:grid-cols-10 gap-x-2 mt-16">
           <div className="col-span-6">
             <p className="text-3xl font-light"><span className="font-bold">Dental'e </span>Hoşgeldiniz</p>
             <div className="h-0.5 w-32 mt-3 bg-[#4de4f8]"></div>
@@ -198,7 +194,7 @@ const page = () => {
               <button className="border-2 border-[#4de4f8] text-[#4de4f8] uppercase text-sm py-3 px-5 hover:bg-[#4de4f8] hover:border-[#4de4f8] duration-500 hover:text-white">İletişime Geç</button>
             </div>
           </div>
-          <div className="col-span-4">
+          <div className="col-span-4 mt-8 lg:mt-0">
             <div className="w-full py-12 border-2 border-[#4de4f8] grid grid-cols-10">
               <div className="col-span-3 flex justify-center border-r-2 border-[#4de4f8]">
                 <TfiHeadphoneAlt size={80} color="#ACEEFE" />

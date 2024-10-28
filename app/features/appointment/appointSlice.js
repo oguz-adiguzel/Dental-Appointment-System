@@ -27,9 +27,6 @@ const appointSlice = createSlice({
       state.tarih = action.payload;
     },
     addTime: (state, action) => {
-      console.log('====================================');
-      console.log('payload', action.payload);
-      console.log('====================================');
       state.saat = action.payload;
     },
     addName: (state, action) => {
