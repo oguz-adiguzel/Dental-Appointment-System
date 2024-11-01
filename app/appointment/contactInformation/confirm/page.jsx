@@ -29,7 +29,14 @@ const page = () => {
 
   const getAllDoctors = async () => {
     try {
-      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/doctors/`);
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_URL}/doctors/`,
+        {
+          headers: {
+            "x-api-key": process.env.NEXT_PUBLIC_API_SECRET_KEY,
+          },
+        }
+      );
 
       setDoctorList(response.data.doctors);
     } catch (error) {
@@ -59,6 +66,11 @@ const page = () => {
           patientAddress: address,
           patientMessage: message,
           patientDepartment: departman,
+        },
+        {
+          headers: {
+            "x-api-key": process.env.NEXT_PUBLIC_API_SECRET_KEY,
+          },
         }
       );
       toast.success(response.data.message, {
@@ -103,6 +115,11 @@ const page = () => {
         `${process.env.NEXT_PUBLIC_API_URL}/email/send-code`,
         {
           email: email,
+        },
+        {
+          headers: {
+            "x-api-key": process.env.NEXT_PUBLIC_API_SECRET_KEY,
+          },
         }
       );
 
@@ -124,11 +141,16 @@ const page = () => {
   const verifyCode = async () => {
     try {
       const response = await axios.post(
-        `${process.env.NEXT_PUBLIC_API_URL}/email/verify-code`,
+        `${process.env.NEXT_PUBLIC_API_URL}/email/verify-code`, 
         {
           email: email,
           code: inputCode,
-        }
+        },
+        {
+          headers: {
+            "x-api-key": process.env.NEXT_PUBLIC_API_SECRET_KEY,
+          },
+        },
       );
       if (response) {
         toast.success(response.data.message, {

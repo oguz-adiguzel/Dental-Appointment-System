@@ -10,19 +10,26 @@ import "react-toastify/dist/ReactToastify.css";
 import { adminAuth } from "../middleware/adminAuth";
 
 const page = () => {
-  
   const [userName, setUserName] = useState();
   const [password, setPassword] = useState();
-  const router = useRouter()
+  const router = useRouter();
 
-  adminAuth()
+  adminAuth();
 
   const login = async () => {
     try {
-      const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/admin/login`, {
-        userName: userName,
-        password: password,
-      });
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_API_URL}/admin/login`,
+        {
+          userName: userName,
+          password: password,
+        },
+        {
+          headers: {
+            "x-api-key": process.env.NEXT_PUBLIC_API_SECRET_KEY,
+          },
+        },
+      );
 
       if (response) {
         Cookies.set("tokenKey", response.data.token);
@@ -39,7 +46,7 @@ const page = () => {
         router.push("admin");
       }
     } catch (error) {
-        console.log(error);
+      console.log(error);
       toast.error(error.response.data.message, {
         position: "top-right",
         autoClose: 3000,
@@ -93,7 +100,10 @@ const page = () => {
             />
           </div>
           <div className="mt-8 flex justify-end pr-24">
-            <button onClick={()=> login()} className="px-8 py-3 rounded-full bg-[#999EE3] text-white text-sm">
+            <button
+              onClick={() => login()}
+              className="px-8 py-3 rounded-full bg-[#999EE3] text-white text-sm"
+            >
               Giriş Yap
             </button>
           </div>

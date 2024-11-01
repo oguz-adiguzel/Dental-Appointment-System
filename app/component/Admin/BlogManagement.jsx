@@ -6,6 +6,7 @@ import dynamic from "next/dynamic";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Cookies from "js-cookie";
 
 const ReactQuill = dynamic(() => import("react-quill"), {
   ssr: false,
@@ -17,13 +18,22 @@ const BlogManagement = () => {
   const [text, setText] = useState();
   const [photo, setPhoto] = useState();
 
+  const token = Cookies.get('tokenKey')
+
+  console.log('token',token);
+  
+
   const addBlog = async () => {
     const formData = new FormData();
     formData.append("title", title);
     formData.append("text", text);
     formData.append("image", photo);
     try {
-      const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/blog`, formData);
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/blog`, formData,{
+        headers: {
+          "x-api-key": process.env.NEXT_PUBLIC_API_SECRET_KEY,
+        },
+      },);
       toast.success(response.data.message, {
         position: "top-right",
         autoClose: 3000,

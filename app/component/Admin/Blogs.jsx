@@ -9,12 +9,18 @@ import DOMPurify from "dompurify";
 import parse from "html-react-parser";
 
 const Blogs = () => {
-  
   const [blogs, setBlogs] = useState([]);
 
   const getAllBlog = async () => {
     try {
-      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/blog`);
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_URL}/blog`,
+        {
+          headers: {
+            "x-api-key": process.env.NEXT_PUBLIC_API_SECRET_KEY,
+          },
+        }
+      );
       setBlogs(response.data.blogs);
     } catch (error) {
       console.log("error", error);
@@ -23,7 +29,14 @@ const Blogs = () => {
 
   const deleteBlog = async (id) => {
     try {
-      const response = await axios.delete(`${process.env.NEXT_PUBLIC_API_URL}/blog/${id}`);
+      const response = await axios.delete(
+        `${process.env.NEXT_PUBLIC_API_URL}/blog/${id}`,
+        {
+          headers: {
+            "x-api-key": process.env.NEXT_PUBLIC_API_SECRET_KEY,
+          },
+        }
+      );
       toast.success(response.data.message, {
         position: "top-right",
         autoClose: 3000,
@@ -34,10 +47,10 @@ const Blogs = () => {
         progress: undefined,
         theme: "light",
       });
-      getAllBlog()
+      getAllBlog();
     } catch (error) {
       console.log("error", error);
-      toast.error('Hata oluştu', {
+      toast.error("Hata oluştu", {
         position: "top-right",
         autoClose: 3000,
         hideProgressBar: false,
@@ -52,8 +65,8 @@ const Blogs = () => {
 
   const cleanText = (text) => {
     const cleanHTML = DOMPurify.sanitize(text);
-    const newText = parse(cleanHTML)
-    return newText
+    const newText = parse(cleanHTML);
+    return newText;
   };
 
   useEffect(() => {
@@ -61,7 +74,7 @@ const Blogs = () => {
   }, []);
   return (
     <>
-    <ToastContainer />
+      <ToastContainer />
       <div className="text-black w-[90%] h-[90%] overflow-scroll mx-auto mt-10 py-10 px-6 rounded-xl bg-white grid grid-cols-4 gap-7">
         {blogs.length !== 0 ? (
           blogs?.map((item) => (
@@ -93,7 +106,9 @@ const Blogs = () => {
                   {item.title}
                 </p>
                 <div className="w-full h-24 mt-5 overflow-hidden">
-                  <p className="text-gray-400 font-light">{cleanText(item.text)}</p>
+                  <p className="text-gray-400 font-light">
+                    {cleanText(item.text)}
+                  </p>
                 </div>
                 <div className="mt-5 flex space-x-5 font-light">
                   <div className="flex items-center space-x-1">

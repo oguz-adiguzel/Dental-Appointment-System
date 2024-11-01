@@ -10,9 +10,7 @@ import { Modal } from "react-responsive-modal";
 import DOMPurify from "dompurify";
 import parse from "html-react-parser";
 
-
 const Doctors = () => {
-  
   const [doctors, setDoctors] = useState();
   const [open, setOpen] = useState(false);
   const [doctorAppintment, setDoctorAppointment] = useState([]);
@@ -29,15 +27,19 @@ const Doctors = () => {
         `${process.env.NEXT_PUBLIC_API_URL}/doctors/getAppointment`,
         {
           id: id,
-        }
+        },
+        {
+          headers: {
+            "x-api-key": process.env.NEXT_PUBLIC_API_SECRET_KEY,
+          },
+        },
       );
       setDoctorAppointment((prevItems) => [
         ...prevItems,
         response.data.appointment,
       ]);
     } catch (error) {
-        console.log('error',error);
-        
+      console.log("error", error);
     }
   };
 
@@ -51,13 +53,20 @@ const Doctors = () => {
     });
   };
   const onCloseModal = () => {
-    setOpen(false)
-    setDoctorAppointment([])
+    setOpen(false);
+    setDoctorAppointment([]);
   };
 
   const getAllDoctors = async () => {
     try {
-      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/doctors/`);
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_URL}/doctors/`,
+        {
+          headers: {
+            "x-api-key": process.env.NEXT_PUBLIC_API_SECRET_KEY,
+          },
+        }
+      );
 
       setDoctors(response.data.doctors);
     } catch (error) {
@@ -71,7 +80,10 @@ const Doctors = () => {
 
   const imageBodyTemplate = (doctors) => {
     return (
-      <img src={doctors.photoUrl} className="w-20 h-20 object-cover shadow-2 border-round" />
+      <img
+        src={doctors.photoUrl}
+        className="w-20 h-20 object-cover shadow-2 border-round"
+      />
     );
   };
 
@@ -87,10 +99,10 @@ const Doctors = () => {
   };
 
   const experienceCol1 = (doctors) => {
-    return cleanText(doctors.certificates)
+    return cleanText(doctors.certificates);
   };
   const experienceCol2 = (doctors) => {
-    return cleanText(doctors.awards)
+    return cleanText(doctors.awards);
   };
 
   const exportToExcel = () => {
@@ -100,18 +112,20 @@ const Doctors = () => {
     XLSX.writeFile(workbook, "dental_hekim_listesi.xlsx");
   };
 
-
   return (
     <div className="w-full">
       <Modal open={open} onClose={onCloseModal} center>
         <div className="w-full py-10">
-        <DataTable value={doctorAppintment} tableStyle={{ minWidth: "50rem" }}>
-          <Column field="patientName" header="İsim"></Column>
-          <Column field="patientSurName" header="Soyisim"></Column>
-          <Column field="patientPhone" header="Telefon"></Column>
-          <Column field="date" header="Tarih"></Column>
-          <Column field="timeSlot" header="Saat"></Column>
-        </DataTable>
+          <DataTable
+            value={doctorAppintment}
+            tableStyle={{ minWidth: "50rem" }}
+          >
+            <Column field="patientName" header="İsim"></Column>
+            <Column field="patientSurName" header="Soyisim"></Column>
+            <Column field="patientPhone" header="Telefon"></Column>
+            <Column field="date" header="Tarih"></Column>
+            <Column field="timeSlot" header="Saat"></Column>
+          </DataTable>
         </div>
       </Modal>
       <div className="w-[90%] mx-auto h-[800px] bg-white overflow-scroll py-10 px-5 mt-10 rounded-xl">

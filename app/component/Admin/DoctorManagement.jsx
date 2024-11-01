@@ -16,7 +16,6 @@ const ReactQuill = dynamic(() => import("react-quill"), {
 });
 
 const DoctorManagement = () => {
-
   const [doctorList, setDoctorList] = useState();
   const [open, setOpen] = useState(false);
   const [openDoctor, setOpenDoctor] = useState(false);
@@ -27,12 +26,19 @@ const DoctorManagement = () => {
   const [awards, setAwards] = useState("");
   const [photoUrl, setPhotoUrl] = useState();
   const [doctorId, setDoctorId] = useState();
-  const [doctorName, setDoctorName] = useState()
+  const [doctorName, setDoctorName] = useState();
   const [selectedDate, setSelectedDate] = useState(new Date());
 
   const getAllDoctors = async () => {
     try {
-      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/doctors/`);
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_URL}/doctors/`,
+        {
+          headers: {
+            "x-api-key": process.env.NEXT_PUBLIC_API_SECRET_KEY,
+          },
+        }
+      );
 
       setDoctorList(response.data.doctors);
     } catch (error) {
@@ -59,7 +65,12 @@ const DoctorManagement = () => {
     try {
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_API_URL}/doctors`,
-        formData
+        formData,
+        {
+          headers: {
+            "x-api-key": process.env.NEXT_PUBLIC_API_SECRET_KEY,
+          },
+        }
       );
       toast.success(response.data.message, {
         position: "top-right",
@@ -105,14 +116,22 @@ const DoctorManagement = () => {
     setOpenDoctor(true);
   };
 
-  console.log('selectedDate',selectedDate );
+  console.log("selectedDate", selectedDate);
 
-  const closeDate = async() =>{
-    try{
-      const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL}/doctors/closeDate`,{
-        doctorId:doctorId,
-        date:selectedDate
-      })
+  const closeDate = async () => {
+    try {
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_API_URL}/doctors/closeDate`,
+        {
+          doctorId: doctorId,
+          date: selectedDate,
+        },
+        {
+          headers: {
+            "x-api-key": process.env.NEXT_PUBLIC_API_SECRET_KEY,
+          },
+        },
+      );
       toast.success(response.data.message, {
         position: "top-right",
         autoClose: 3000,
@@ -123,11 +142,10 @@ const DoctorManagement = () => {
         progress: undefined,
         theme: "light",
       });
-      onCloseDoctorModal()
-
-    }catch(error){
-      console.log('error', error);
-      toast.error('Hata oluştu', {
+      onCloseDoctorModal();
+    } catch (error) {
+      console.log("error", error);
+      toast.error("Hata oluştu", {
         position: "top-right",
         autoClose: 3000,
         hideProgressBar: false,
@@ -138,16 +156,19 @@ const DoctorManagement = () => {
         theme: "light",
       });
     }
-  }
-  
+  };
 
   return (
     <div className="w-full text-black">
       <ToastContainer />
       <Modal open={openDoctor} onClose={onCloseDoctorModal} center>
         <div className="w-[800px] h-96 py-10 text-black flex flex-col items-center">
-          <p className="text-xl font-semibold">Dt. {doctorName} İçin Randevu Günü Kapatma</p>
-          <p className="text-sm text-gray-500">Seçilecek tarihte bu doktora randevu oluşturulması engellenecektir.</p>
+          <p className="text-xl font-semibold">
+            Dt. {doctorName} İçin Randevu Günü Kapatma
+          </p>
+          <p className="text-sm text-gray-500">
+            Seçilecek tarihte bu doktora randevu oluşturulması engellenecektir.
+          </p>
           <div className="relative mt-7">
             <DatePicker
               className="w-full py-4 px-3 font-light border outline-none"
@@ -163,7 +184,12 @@ const DoctorManagement = () => {
               <CiCalendarDate size={20} />
             </div>
           </div>
-          <button onClick={()=>closeDate()} className="mt-10 border-2 border-gray-700 text-sm px-5 py-1 rounded-full">Gün Kapat</button>
+          <button
+            onClick={() => closeDate()}
+            className="mt-10 border-2 border-gray-700 text-sm px-5 py-1 rounded-full"
+          >
+            Gün Kapat
+          </button>
         </div>
       </Modal>
       <Modal open={open} onClose={onCloseModal} center>
@@ -250,7 +276,7 @@ const DoctorManagement = () => {
                 onClick={() => {
                   onOpenDoctorModal();
                   setDoctorId(item._id);
-                  setDoctorName(item.name)
+                  setDoctorName(item.name);
                 }}
                 className="text-sm border-2 border-green-600 px-2 py-1 text-green-600 rounded-full hover:bg-green-600 hover:text-white duration-500"
               >

@@ -7,7 +7,6 @@ import "react-toastify/dist/ReactToastify.css";
 import MakeAppointment from "./MakeAppointment";
 
 const AppointmentManage = () => {
-
   const [appointmetList, setAppointmentList] = useState();
   const [doctorFilter, setDoctorFilter] = useState();
   const [filteredData, setFilteredData] = useState();
@@ -43,7 +42,12 @@ const AppointmentManage = () => {
     if (!appointmetList) {
       try {
         const response = await axios.get(
-          `${process.env.NEXT_PUBLIC_API_URL}/doctors/getAllAppointment`
+          `${process.env.NEXT_PUBLIC_API_URL}/doctors/getAllAppointment`,
+          {
+            headers: {
+              "x-api-key": process.env.NEXT_PUBLIC_API_SECRET_KEY,
+            },
+          }
         );
         setAppointmentList(response.data.appointments);
       } catch (error) {
@@ -54,7 +58,14 @@ const AppointmentManage = () => {
 
   const getAllDoctors = async () => {
     try {
-      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/doctors/`);
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_URL}/doctors/`,
+        {
+          headers: {
+            "x-api-key": process.env.NEXT_PUBLIC_API_SECRET_KEY,
+          },
+        }
+      );
 
       setDoctors(response.data.doctors);
     } catch (error) {
@@ -92,7 +103,12 @@ const AppointmentManage = () => {
           `${process.env.NEXT_PUBLIC_API_URL}/doctors/confirm`,
           {
             id: propId,
-          }
+          },
+          {
+            headers: {
+              "x-api-key": process.env.NEXT_PUBLIC_API_SECRET_KEY,
+            },
+          },
         );
         toast.success(response.data.message, {
           position: "top-right",

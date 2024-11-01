@@ -20,7 +20,11 @@ const page = () => {
   const getBlog = async () => {
     try {
       const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_URL}/blog/${params.slug[0]}`
+        `${process.env.NEXT_PUBLIC_API_URL}/blog/${params.slug[0]}`,{
+          headers: {
+            "x-api-key": process.env.NEXT_PUBLIC_API_SECRET_KEY,
+          },
+        }
       );
       setBlog(response.data.blog);
     } catch (error) {

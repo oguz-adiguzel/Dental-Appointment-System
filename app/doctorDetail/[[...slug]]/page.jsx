@@ -8,7 +8,6 @@ import DOMPurify from "dompurify";
 import parse from "html-react-parser";
 
 const page = () => {
-
   const [doctor, setDoctor] = useState();
   const [cleanExperience, setCleanExperience] = useState();
   const [cleanCertificates, setCleanCertificates] = useState();
@@ -20,7 +19,12 @@ const page = () => {
   const getDoctor = async () => {
     try {
       const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_URL}/doctors/${params.slug[0]}`
+        `${process.env.NEXT_PUBLIC_API_URL}/doctors/${params.slug[0]}`,
+        {
+          headers: {
+            "x-api-key": process.env.NEXT_PUBLIC_API_SECRET_KEY,
+          },
+        }
       );
       setDoctor(response.data.doctor);
     } catch (error) {

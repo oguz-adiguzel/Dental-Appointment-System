@@ -7,7 +7,6 @@ import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 
 const MakeAppointment = ({ modal, onValueChange }) => {
-
   const [selectedDepartment, setSelectedDepatment] = useState();
   const [selectedDentist, setSelectedDentist] = useState();
   const [doctorList, setDoctorList] = useState();
@@ -30,7 +29,14 @@ const MakeAppointment = ({ modal, onValueChange }) => {
 
   const getAllDoctors = async () => {
     try {
-      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/doctors/`);
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_URL}/doctors/`,
+        {
+          headers: {
+            "x-api-key": process.env.NEXT_PUBLIC_API_SECRET_KEY,
+          },
+        }
+      );
 
       setDoctorList(response.data.doctors);
     } catch (error) {
@@ -46,7 +52,12 @@ const MakeAppointment = ({ modal, onValueChange }) => {
           {
             doctorId: selectedDentist,
             date: date,
-          }
+          },
+          {
+            headers: {
+              "x-api-key": process.env.NEXT_PUBLIC_API_SECRET_KEY,
+            },
+          },
         );
         setAvailableTime(response.data.availableSlots);
         toast.success(response.data.message, {
@@ -102,8 +113,13 @@ const MakeAppointment = ({ modal, onValueChange }) => {
           patientAddress: address,
           patientMessage: message,
           patientDepartment: selectedDepartment,
-          confirm:true
-        }
+          confirm: true,
+        },
+        {
+          headers: {
+            "x-api-key": process.env.NEXT_PUBLIC_API_SECRET_KEY,
+          },
+        },
       );
       toast.success(response.data.message, {
         position: "top-right",
@@ -115,7 +131,7 @@ const MakeAppointment = ({ modal, onValueChange }) => {
         progress: undefined,
         theme: "light",
       });
-      handleChange()
+      handleChange();
     } catch (error) {
       console.log("error", error);
       toast.error("Hata oluştu", {
@@ -132,7 +148,7 @@ const MakeAppointment = ({ modal, onValueChange }) => {
   };
 
   const handleChange = () => {
-    onValueChange(false); 
+    onValueChange(false);
   };
 
   useEffect(() => {
@@ -142,12 +158,16 @@ const MakeAppointment = ({ modal, onValueChange }) => {
 
   return (
     <div className="w-full text-black relative">
-        <div className="w-full flex justify-end absolute right-2">
-        <button onClick={()=>handleChange()} className="right-0 bg-red-600 text-white text-lg px-2 rounded-full">x</button>
-        </div>
+      <div className="w-full flex justify-end absolute right-2">
+        <button
+          onClick={() => handleChange()}
+          className="right-0 bg-red-600 text-white text-lg px-2 rounded-full"
+        >
+          x
+        </button>
+      </div>
       <ToastContainer />
       <p className="text-center text-xl">Günlük Randevu Oluştur</p>
-      
       <div className="w-3/5 mx-auto grid grid-cols-2 gap-x-5 mt-8">
         <select
           onChange={(e) => setSelectedDepatment(e.target.value)}
@@ -257,7 +277,10 @@ const MakeAppointment = ({ modal, onValueChange }) => {
             ></textarea>
           </div>
           <div className="w-full flex justify-center items-center mt-5">
-            <button onClick={()=>makeAppointment()} className="px-6 py-2 border-2 border-gray-700 rounded-full text-sm hover:bg-gray-700 hover:text-white duration-500">
+            <button
+              onClick={() => makeAppointment()}
+              className="px-6 py-2 border-2 border-gray-700 rounded-full text-sm hover:bg-gray-700 hover:text-white duration-500"
+            >
               Randevu Oluştur
             </button>
           </div>

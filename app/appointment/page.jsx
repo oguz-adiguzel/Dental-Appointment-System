@@ -55,7 +55,12 @@ const page = () => {
           {
             doctorId: selectedDentist,
             date: selectedDate,
-          }
+          },
+          {
+            headers: {
+              "x-api-key": process.env.NEXT_PUBLIC_API_SECRET_KEY,
+            },
+          },
         );
         setAvailableTime(response.data.availableSlots);
         scroller.scrollTo("targetElement", {
@@ -102,7 +107,11 @@ const page = () => {
 
   const getAllDoctors = async () => {
     try {
-      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/doctors/`);
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/doctors/`,{
+        headers: {
+          "x-api-key": process.env.NEXT_PUBLIC_API_SECRET_KEY,
+        },
+      });
 
       setDoctorList(response.data.doctors);
     } catch (error) {

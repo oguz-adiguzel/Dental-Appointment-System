@@ -6,13 +6,19 @@ import DOMPurify from "dompurify";
 import parse from "html-react-parser";
 
 const page = () => {
-  
   const [doctorData, setDoctorData] = useState();
   const router = useRouter();
 
   const getDoctorList = async () => {
     try {
-      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/doctors`);
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_URL}/doctors`,
+        {
+          headers: {
+            "x-api-key": process.env.NEXT_PUBLIC_API_SECRET_KEY,
+          },
+        }
+      );
       if (response) {
         setDoctorData(response.data.doctors);
       }

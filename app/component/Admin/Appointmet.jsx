@@ -6,7 +6,6 @@ import axios from "axios";
 import * as XLSX from "xlsx";
 
 const Appointmet = () => {
-  
   const [appointmetList, setAppointmentList] = useState();
   const [doctors, setDoctors] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
@@ -42,10 +41,15 @@ const Appointmet = () => {
   const getAppointmentList = async () => {
     try {
       const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_API_URL}/doctors/getAllAppointment`
+        `${process.env.NEXT_PUBLIC_API_URL}/doctors/getAllAppointment`,
+        {
+          headers: {
+            "x-api-key": process.env.NEXT_PUBLIC_API_SECRET_KEY,
+          },
+        }
       );
       setAppointmentList(response.data.appointments);
-      setLoading(false)
+      setLoading(false);
     } catch (error) {
       console.log("error", error);
     }
@@ -53,7 +57,14 @@ const Appointmet = () => {
 
   const getAllDoctors = async () => {
     try {
-      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/doctors/`);
+      const response = await axios.get(
+        `${process.env.NEXT_PUBLIC_API_URL}/doctors/`,
+        {
+          headers: {
+            "x-api-key": process.env.NEXT_PUBLIC_API_SECRET_KEY,
+          },
+        }
+      );
 
       setDoctors(response.data.doctors);
     } catch (error) {
@@ -65,9 +76,9 @@ const Appointmet = () => {
     getAppointmentList();
   }, []);
 
-  useEffect(()=>{
+  useEffect(() => {
     getAllDoctors();
-  },[appointmetList])
+  }, [appointmetList])
 
   useEffect(() => {
     const now = new Date().toLocaleDateString("tr-TR", {
@@ -75,6 +86,10 @@ const Appointmet = () => {
       month: "2-digit",
       year: "numeric",
     });
+
+    console.log('====================================');
+    console.log('now', now);
+    console.log('====================================');
 
     let filtered = appointmetList;
 
@@ -101,13 +116,17 @@ const Appointmet = () => {
     );
 
     setFilteredData(filtered);
-  }, [searchText, appointmetList, appointmentFilter]);
+  }, [searchText, appointmentFilter]);
 
   const exportToExcel = () => {
     // Workbook ve Sheet oluşturma
     const worksheet = XLSX.utils.json_to_sheet(appointmetList);
     const workbook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workbook, worksheet, "Dental Hasta Randeu Listesi");
+    XLSX.utils.book_append_sheet(
+      workbook,
+      worksheet,
+      "Dental Hasta Randeu Listesi"
+    );
 
     // Dosyayı indir
     XLSX.writeFile(workbook, "dental_hasta_randevu_listesi.xlsx");
