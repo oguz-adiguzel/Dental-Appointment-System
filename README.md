@@ -1,36 +1,89 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+![Logo](https://dtdental.wpenginepowered.com/wp-content/themes/dental/images/logo.png)
 
-First, run the development server:
+    
+# Dental Online Randevu Sistemi
+
+Nextjs ile hastane online randevu sistemi client projesi. Hastaların seçtikleri doktor, tarih ve saat bilgileri ile randevu alması sağlanır. Alınan hasta bilgileri sisteme kaydedilir ve randevu sisteme eklenir.
+
+
+
+
+## Kullanılan Teknolojiler
+
+**İstemci:** Nextjs, Redux Toolkit, TailwindCSS, Prime React, React İcons, React Quill, React Toastify, Swiper, XLSX, React Datepicker, React Hook Form, React Scroll
+
+
+
+  
+## Tasarım
+
+- [Dental Wordpress Theme](https://dtdental.wpengine.com/) adresindeki tasarımdan esinlenerek kodlanmıştır.
+
+  
+## Ortam Değişkenleri
+
+Bu projeyi çalıştırmak için aşağıdaki ortam değişkenlerini .env dosyanıza eklemeniz gerekecek
+
+`NEXT_PUBLIC_API_URL`
+
+`NEXT_PUBLIC_API_SECRET_KEY`
+
+  
+## Geri Bildirim
+
+Herhangi bir geri bildiriminiz varsa, lütfen oguz_adiguzel@outlook.com adresinden bana ulaşın.
+
+  
+## Özellikler
+
+- Randevu Tarih Seçme
+- Randevu Saat Seçme
+- Randevu alınacak Hekim Seçme
+
+  
+## Yükleme 
+
+dental-appointment-system'i npm kullanarak yükleyin
+
+```bash 
+  npm install //node-modules dosyasının oluşturulması
+  npm run dev //projenin başlatılması
+```
+    
+## İlişkili Projeler
+
+[Dental API](https://github.com/oguz-adiguzel/Dental-Appointment-Api)
+
+  
+## Bilgisayarınızda Çalıştırın
+
+Projeyi klonlayın
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+  git clone https://link-to-project
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Proje dizinine gidin
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+```bash
+  cd my-project
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Gerekli paketleri yükleyin
 
-## Learn More
+```bash
+  npm install
+```
 
-To learn more about Next.js, take a look at the following resources:
+Sunucuyu çalıştırın
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+  npm run dev
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+  
+## Demo
 
-## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- [Dental Demo Url](https://dental-appointment-system-ten.vercel.app) adresinden inceleyebilirsiniz.
